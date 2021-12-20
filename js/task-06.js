@@ -2,18 +2,33 @@ const refs = {
     input: document.querySelector('[id="validation-input"]'),
   };
 
-console.log(refs.input)
-  refs.input.addEventListener('blur', onInputChange);
+// console.log(refs.input)
+  
+
 
   
 
 function onInputChange(event) {
-    console.log(refs.input.dataset.length)
-    if (event.currentTarget.value.length == refs.input.dataset.length) {
-        
-        refs.input.classList.add("valid");
+    // console.log(event.currentTarget.value.length);
+    // console.log(+refs.input.dataset.length);
+    if (event.currentTarget.value.length === +refs.input.dataset.length) {
+        changeClass("valid","invalid");
+        return;
     }
-    else if (event.currentTarget.value.length !== refs.input.dataset.length){ 
-      refs.input.classList.add("invalid");
-    }
-}
+    changeClass("invalid","valid");
+};
+
+
+
+
+
+function changeClass (add, remove) {
+   refs.input.classList.add(add);
+   refs.input.classList.remove(remove);
+
+};
+
+
+
+refs.input.addEventListener('blur', onInputChange);
+changeClass();
